@@ -1,0 +1,74 @@
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button-primary {
+  background-color: #a8dadc;
+  color: #1d3557;
+}
+
+.button-primary:hover {
+  background-color: #76c7c0;
+  transform: translateY(-2px);
+}
+
+.button-primary:active {
+  background-color: #76c7c0;
+  transform: translateY(0);
+}
+
+.button-secondary {
+  background-color: #f1faee;
+  color: #457b9d;
+}
+
+.button-secondary:hover {
+  background-color: #e9f5f2;
+  transform: translateY(-2px);
+}
+
+.button-secondary:active {
+  background-color: #e9f5f2;
+  transform: translateY(0);
+}
+
+.button-delete {
+  background-color: #e8c7bf;
+  color: #6d1b1b;
+}
+
+.button-delete:hover {
+  background-color: #ff9999;
+  transform: translateY(-2px);
+}
+
+.button-delete:active {
+  background-color: #e8c7bf;
+  transform: translateY(0);
+}
+
+.button-read {
+  background-color: #bde0fe;
+  color: #1d3557;
+}
+
+.button-read:hover {
+  background-color: #a0d2f0;
+  transform: translateY(-2px);
+}
+
+.button-read:active {
+  background-color: #a0d2f0;
+  transform: translateY(0);
+}

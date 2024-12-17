@@ -1,48 +1,73 @@
-import React from "react";
-import "../Styles/Cards.css";
+import React, { useState } from "react";
+import Button from "./Buttons";
+import { useCardStyles } from "./CardStyles";
 
-const Cards = ({ entries, onCardClick, onAddToFavorites }) => {
+const Cards = ({
+  entries,
+  onCardClick,
+  onAddToFavorites,
+  onDeleteFromFavorites,
+  isFavoriteList,
+}) => {
+  const cardStyles = useCardStyles();
+  const [expandedEntryId, setExpandedEntryId] = useState(null);
+
+  const handleReadEntry = (entryId) => {
+    setExpandedEntryId(expandedEntryId === entryId ? null : entryId);
+  };
+
   return (
-    <div className="cards-container">
+    <div className={cardStyles.container}>
       {entries.map((entry) => (
-        <div
-          key={entry.id}
-          className="card max-w-sm bg-[#deecee] border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-        >
+        <div key={entry.id} className={cardStyles.card}>
           <div onClick={() => onCardClick(entry)} className="cursor-pointer">
             <img
-              className="rounded-t-lg w-full h-48 object-cover"
+              className={cardStyles.image}
               src={entry.imageUrl || "https://picsum.photos/400"}
               alt={entry.title}
               onError={(e) => {
                 e.target.src = "https://picsum.photos/400";
               }}
             />
-            <div className="card-content p-5">
-              <h5 className="card-title mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                {entry.title}
-              </h5>
-              <p className="card-text mb-3 font-normal text-gray-700 dark:text-gray-400 line-clamp-3">
+            <div className={cardStyles.content}>
+              <h5 className={cardStyles.title}>{entry.title}</h5>
+              <p
+                className={`${cardStyles.text} ${
+                  expandedEntryId === entry.id ? "expanded" : ""
+                }`}
+              >
                 {entry.content}
               </p>
-              <div className=" flex justify-between items-center ">
-                <button
+              <div className="flex justify-between items-center">
+                {isFavoriteList ? (
+                  <Button
+                    type="delete"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onDeleteFromFavorites(entry);
+                    }}
+                  >
+                    Delete from Favorites
+                  </Button>
+                ) : (
+                  <Button
+                    type="primary"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onAddToFavorites(entry);
+                    }}
+                  >
+                    Add to Favorites
+                  </Button>
+                )}
+                <Button
+                  type="read"
                   onClick={(e) => {
                     e.stopPropagation();
-                    onAddToFavorites(entry);
+                    handleReadEntry(entry.id);
                   }}
-                  className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-fuchsia-300 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                 >
-                  Add to Favorites
-                </button>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onCardClick(entry);
-                  }}
-                  className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-sky-200 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  Read Entry
+                  {expandedEntryId === entry.id ? "Hide Entry" : "Read Entry"}
                   <svg
                     className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
                     aria-hidden="true"
@@ -58,11 +83,11 @@ const Cards = ({ entries, onCardClick, onAddToFavorites }) => {
                       d="M1 5h12m0 0L9 1m4 4L9 9"
                     />
                   </svg>
-                </button>
+                </Button>
               </div>
             </div>
           </div>
-          <div className="absolute top-0 right-0 bg-rose-200 text-gray-800 text-xs p-1 rounded-br-lg">
+          <div className={cardStyles.date}>
             {new Date(entry.date).toLocaleDateString()}
           </div>
         </div>

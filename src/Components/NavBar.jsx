@@ -28,7 +28,7 @@ const NavBar = () => {
                   className="fas fa-book  navbar-icon"
                   style={{ color: "#c78fcc" }}
                 ></i>{" "}
-                Entry
+                Chronicles
               </Link>
             </li>
             <li>
@@ -46,7 +46,7 @@ const NavBar = () => {
                   className="fas fa-calendar navbar-icon"
                   style={{ color: "#c78fcc" }}
                 ></i>{" "}
-                Calender
+                Events
               </Link>
             </li>
           </ul>
