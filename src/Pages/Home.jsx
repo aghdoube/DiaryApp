@@ -36,13 +36,11 @@ const Home = () => {
       return false;
     }
 
-    // Add unique ID to the entry
     const entryWithId = {
       ...newEntry,
       id: uuidv4(),
     };
 
-    // Add new entry and sort
     const updatedEntries = [...entries, entryWithId].sort(
       (a, b) => new Date(b.date) - new Date(a.date)
     );
@@ -51,30 +49,46 @@ const Home = () => {
     return true;
   };
 
-  // Open full entry modal
   const openEntryModal = (entry) => {
     setSelectedEntry(entry);
   };
 
-  // Close entry modal
   const closeEntryModal = () => {
     setSelectedEntry(null);
+  };
+  const handleAddToFavorites = (entry) => {
+    const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    const isDuplicate = savedFavorites.some((fav) => fav.id === entry.id);
+
+    if (isDuplicate) {
+      console.log("This entry is already in your favorites.");
+      return;
+    }
+
+    savedFavorites.push(entry);
+
+    localStorage.setItem("favorites", JSON.stringify(savedFavorites));
+
+    console.log("Added to favorites:", entry);
   };
 
   return (
     <MainLayout>
       <Hero onAddEntry={() => setIsAddModalOpen(true)} />
 
-      <Cards entries={entries} onCardClick={openEntryModal} />
+      <Cards
+        entries={entries}
+        onCardClick={openEntryModal}
+        onAddToFavorites={handleAddToFavorites}
+      />
 
-      {/* Create Entry Modal */}
       <CreateEntry
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
         onAddEntry={addEntry}
       />
 
-      {/* Entry Details Modal */}
       <EntryModal entry={selectedEntry} onClose={closeEntryModal} />
     </MainLayout>
   );

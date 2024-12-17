@@ -60,3 +60,18 @@
   font-style: italic;
   margin-top: 50px;
 }
+
+.entries-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.relative {
+  color: rgb(199, 143, 204);
+  font-family: "Merriweather", serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 70px;
+  color: rgb(199, 143, 204);
+}

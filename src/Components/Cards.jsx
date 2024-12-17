@@ -1,7 +1,7 @@
 import React from "react";
-import "../Styles/Cards.css"; // Ensure the CSS file is imported
+import "../Styles/Cards.css";
 
-const Cards = ({ entries, onCardClick }) => {
+const Cards = ({ entries, onCardClick, onAddToFavorites }) => {
   return (
     <div className="cards-container">
       {entries.map((entry) => (
@@ -25,31 +25,45 @@ const Cards = ({ entries, onCardClick }) => {
               <p className="card-text mb-3 font-normal text-gray-700 dark:text-gray-400 line-clamp-3">
                 {entry.content}
               </p>
-              <div
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onCardClick(entry);
-                }}
-                className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              >
-                Read Entry
-                <svg
-                  className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 14 10"
+              <div className=" flex justify-between items-center ">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onAddToFavorites(entry);
+                  }}
+                  className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-fuchsia-300 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                 >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M1 5h12m0 0L9 1m4 4L9 9"
-                  />
-                </svg>
+                  Add to Favorites
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onCardClick(entry);
+                  }}
+                  className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-sky-200 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                  Read Entry
+                  <svg
+                    className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 14 10"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9"
+                    />
+                  </svg>
+                </button>
               </div>
             </div>
+          </div>
+          <div className="absolute top-0 right-0 bg-rose-200 text-gray-800 text-xs p-1 rounded-br-lg">
+            {new Date(entry.date).toLocaleDateString()}
           </div>
         </div>
       ))}
