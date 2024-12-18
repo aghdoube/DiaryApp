@@ -18,7 +18,7 @@ const Hero = ({ onAddEntry }) => {
           <h2>Where Your Thoughts Find a Home.</h2>
           <button
             onClick={onAddEntry}
-            className=" button bg-sky-200 hover:bg-indigo-500 text-white font-bold py-2 px-4 rounded"
+            className=" button bg-sky-200 hover:bg-indigo-500 text-gray-700 font-bold py-2 px-4 rounded"
           >
             Add New Entry
           </button>

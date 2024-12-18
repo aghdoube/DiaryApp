@@ -13,7 +13,7 @@ export const IziToastProvider = ({ children }) => {
     iziToast[type]({
       title: title,
       message: message,
-      position: "topRight",
+      position: "bottomRight",
     });
   };
 

@@ -9,6 +9,7 @@ export const ButtonProvider = ({ children }) => {
     secondary: "button-secondary",
     delete: "button-delete",
     read: "button-read",
+    edit: "button-edit",
   };
 
   return (

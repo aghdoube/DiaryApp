@@ -1,99 +1,116 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import Button from "../Context/Buttons";
-import { useCardStyles } from "../Context/CardStyles";
+import "../Styles/CardStyle.css";
 
 const Cards = ({
   entries,
   onCardClick,
   onAddToFavorites,
   onDeleteFromFavorites,
-  isFavoriteList,
+  onEditEntry,
+  onDeleteEntry,
 }) => {
-  const cardStyles = useCardStyles();
   const [expandedEntryId, setExpandedEntryId] = useState(null);
 
-  const handleReadEntry = (entryId) => {
-    setExpandedEntryId(expandedEntryId === entryId ? null : entryId);
+  const handleReadEntry = (id) => {
+    setExpandedEntryId(expandedEntryId === id ? null : id);
   };
 
   return (
-    <div className={cardStyles.container}>
+    <div className="card-container">
       {entries.map((entry) => (
-        <div key={entry.id} className={cardStyles.card}>
-          <div onClick={() => onCardClick(entry)} className="cursor-pointer">
-            <img
-              className={cardStyles.image}
-              src={entry.imageUrl || "https://picsum.photos/400"}
-              alt={entry.title}
-              onError={(e) => {
-                e.target.src = "https://picsum.photos/400";
-              }}
-            />
-            <div className={cardStyles.content}>
-              <h5 className={cardStyles.title}>{entry.title}</h5>
-              <p
-                className={`${cardStyles.text} ${
-                  expandedEntryId === entry.id ? "expanded" : ""
-                }`}
-              >
-                {entry.content}
-              </p>
-              <div className="flex justify-between items-center">
-                {isFavoriteList ? (
-                  <Button
-                    type="delete"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onDeleteFromFavorites(entry);
-                    }}
-                  >
-                    Delete from Favorites
-                  </Button>
-                ) : (
-                  <Button
-                    type="primary"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onAddToFavorites(entry);
-                    }}
-                  >
-                    Add to Favorites
-                  </Button>
-                )}
+        <div key={entry.id} className="card" onClick={() => onCardClick(entry)}>
+          <img src={entry.imageUrl} alt={entry.title} className="card-image" />
+          <div className="card-content">
+            <h2 className="card-title">{entry.title}</h2>
+            <p className="card-text">
+              {expandedEntryId === entry.id
+                ? entry.content
+                : `${entry.content.substring(0, 100)}...`}
+            </p>
+            <div className="card-actions">
+              {onDeleteFromFavorites ? (
                 <Button
-                  type="read"
+                  type="primary"
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleReadEntry(entry.id);
+                    onDeleteFromFavorites(entry);
                   }}
                 >
-                  {expandedEntryId === entry.id ? "Hide Entry" : "Read Entry"}
-                  <svg
-                    className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 14 10"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M1 5h12m0 0L9 1m4 4L9 9"
-                    />
-                  </svg>
+                  Delete from Favorites
                 </Button>
-              </div>
+              ) : (
+                <Button
+                  type="primary"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onAddToFavorites(entry);
+                  }}
+                >
+                  Add to Favorites
+                </Button>
+              )}
+              <Button
+                type="read"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleReadEntry(entry.id);
+                }}
+              >
+                {expandedEntryId === entry.id ? "Hide Entry" : "Read Entry"}
+                <svg
+                  className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 10"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M1 5h12m0 0L9 1m4 4L9 9"
+                  />
+                </svg>
+              </Button>
+              <Button
+                type="edit"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onEditEntry(entry);
+                }}
+              >
+                Edit
+              </Button>
+              <Button
+                type="delete"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDeleteEntry(entry);
+                }}
+              >
+                Delete
+              </Button>
             </div>
           </div>
-          <div className={cardStyles.date}>
+          <div className="card-date">
             {new Date(entry.date).toLocaleDateString()}
           </div>
         </div>
       ))}
     </div>
   );
+};
+
+Cards.propTypes = {
+  entries: PropTypes.array.isRequired,
+  onCardClick: PropTypes.func,
+  onAddToFavorites: PropTypes.func,
+  onDeleteFromFavorites: PropTypes.func,
+  onEditEntry: PropTypes.func.isRequired,
+  onDeleteEntry: PropTypes.func.isRequired,
 };
 
 export default Cards;
