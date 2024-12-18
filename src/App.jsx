@@ -7,25 +7,35 @@ import Entry from "./Pages/Entry";
 import NotFound from "./Components/NotFound";
 import Calender from "./Pages/Calender";
 import Favorites from "./Pages/Favorites";
-import { ButtonProvider } from "./Components/Buttons";
-import { CardStylesProvider } from "./Components/CardStyles";
+import { ButtonProvider } from "./Context/Buttons";
+import { CardStylesProvider } from "./Context/CardStyles";
+import { MusicPlayerProvider } from "./Context/MusicPlayerContext";
+import { IziToastProvider } from "./Context/iziToastContext";
+import MusicPlayer from "./Components/MusicPlayer";
 
 function App() {
   return (
-    <ButtonProvider>
-      <CardStylesProvider>
-        <Router>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/notfound" element={<NotFound />} />
-            <Route path="/createentry" element={<CreateEntry />} />
-            <Route path="/entry" element={<Entry />} />
-            <Route path="/calender" element={<Calender />} />
-            <Route path="/favorites" element={<Favorites />} />
-          </Routes>
-        </Router>
-      </CardStylesProvider>
-    </ButtonProvider>
+    <IziToastProvider>
+      <MusicPlayerProvider>
+        <ButtonProvider>
+          <CardStylesProvider>
+            <Router>
+              <div>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/notfound" element={<NotFound />} />
+                  <Route path="/createentry" element={<CreateEntry />} />
+                  <Route path="/entry" element={<Entry />} />
+                  <Route path="/calender" element={<Calender />} />
+                  <Route path="/favorites" element={<Favorites />} />
+                </Routes>
+                <MusicPlayer />
+              </div>
+            </Router>
+          </CardStylesProvider>
+        </ButtonProvider>
+      </MusicPlayerProvider>
+    </IziToastProvider>
   );
 }
 

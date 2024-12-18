@@ -5,6 +5,7 @@ import Hero from "../Components/Hero";
 import Cards from "../Components/Cards";
 import CreateEntry from "../Components/CreateEntry";
 import EntryModal from "../Components/EntryModal";
+import { useIziToast } from "../Context/iziToastContext";
 
 const Home = () => {
   const [entries, setEntries] = useState(() => {
@@ -13,6 +14,7 @@ const Home = () => {
   });
   const [selectedEntry, setSelectedEntry] = useState(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const { showToast } = useIziToast();
 
   useEffect(() => {
     try {
@@ -20,9 +22,13 @@ const Home = () => {
       console.log("Entries saved to localStorage:", entries);
     } catch (error) {
       console.error("Error saving to localStorage:", error);
-      alert("Unable to save entries. Please check your browser settings.");
+      showToast(
+        "error",
+        "Save Error",
+        "Unable to save entries. Please check your browser settings."
+      );
     }
-  }, [entries]);
+  }, [entries, showToast]);
 
   const checkEntryExists = (date) => {
     return entries.some((entry) => entry.date === date);
@@ -30,7 +36,9 @@ const Home = () => {
 
   const addEntry = (newEntry) => {
     if (checkEntryExists(newEntry.date)) {
-      alert(
+      showToast(
+        "error",
+        "Duplicate Entry",
         "An entry already exists for this date. Please choose another date."
       );
       return false;
@@ -46,6 +54,11 @@ const Home = () => {
     );
 
     setEntries(updatedEntries);
+    showToast(
+      "success",
+      "Entry Added",
+      "The new entry has been added successfully."
+    );
     return true;
   };
 
@@ -56,21 +69,28 @@ const Home = () => {
   const closeEntryModal = () => {
     setSelectedEntry(null);
   };
+
   const handleAddToFavorites = (entry) => {
     const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
     const isDuplicate = savedFavorites.some((fav) => fav.id === entry.id);
 
     if (isDuplicate) {
-      console.log("This entry is already in your favorites.");
+      showToast(
+        "info",
+        "Already Added",
+        "This entry is already in your favorites."
+      );
       return;
     }
 
     savedFavorites.push(entry);
-
     localStorage.setItem("favorites", JSON.stringify(savedFavorites));
-
-    console.log("Added to favorites:", entry);
+    showToast(
+      "success",
+      "Added to Favorites",
+      "The entry has been added to your favorites."
+    );
   };
 
   return (
@@ -89,7 +109,9 @@ const Home = () => {
         onAddEntry={addEntry}
       />
 
-      <EntryModal entry={selectedEntry} onClose={closeEntryModal} />
+      {selectedEntry && (
+        <EntryModal entry={selectedEntry} onClose={closeEntryModal} />
+      )}
     </MainLayout>
   );
 };

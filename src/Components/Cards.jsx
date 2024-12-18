@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Button from "./Buttons";
-import { useCardStyles } from "./CardStyles";
+import Button from "../Context/Buttons";
+import { useCardStyles } from "../Context/CardStyles";
 
 const Cards = ({
   entries,

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { format } from "date-fns";
 import { Book, Calendar, Image as ImageIcon, FileText } from "lucide-react";
+import { useIziToast } from "../Context/iziToastContext";
 
 const CreateEntry = ({ isOpen, onClose, onAddEntry }) => {
   const [newEntry, setNewEntry] = useState({
@@ -9,6 +10,8 @@ const CreateEntry = ({ isOpen, onClose, onAddEntry }) => {
     imageUrl: "",
     content: "",
   });
+
+  const { showToast } = useIziToast();
 
   const handleAddEntry = (e) => {
     e.preventDefault();
@@ -19,7 +22,7 @@ const CreateEntry = ({ isOpen, onClose, onAddEntry }) => {
       !newEntry.imageUrl ||
       !newEntry.content
     ) {
-      alert("Please fill in all fields");
+      showToast("error", "Incomplete", "Please fill in all fields");
       return;
     }
 
@@ -32,7 +35,14 @@ const CreateEntry = ({ isOpen, onClose, onAddEntry }) => {
         imageUrl: "",
         content: "",
       });
+      showToast(
+        "success",
+        "Entry Saved",
+        "The new entry has been saved successfully."
+      );
       onClose();
+    } else {
+      showToast("error", "Error", "Failed to save the entry.");
     }
   };
 
@@ -55,7 +65,6 @@ const CreateEntry = ({ isOpen, onClose, onAddEntry }) => {
               onChange={(e) =>
                 setNewEntry({ ...newEntry, title: e.target.value })
               }
-              placeholder="Enter entry title"
               className="input input-bordered"
             />
           </div>
@@ -86,7 +95,6 @@ const CreateEntry = ({ isOpen, onClose, onAddEntry }) => {
               onChange={(e) =>
                 setNewEntry({ ...newEntry, imageUrl: e.target.value })
               }
-              placeholder="Enter image URL"
               className="input input-bordered"
             />
           </div>
@@ -101,16 +109,15 @@ const CreateEntry = ({ isOpen, onClose, onAddEntry }) => {
               onChange={(e) =>
                 setNewEntry({ ...newEntry, content: e.target.value })
               }
-              placeholder="Write your diary entry"
-              className="textarea textarea-bordered h-24"
+              className="textarea textarea-bordered"
             />
           </div>
           <div className="modal-action">
+            <button type="submit" className="btn btn-primary">
+              Save
+            </button>
             <button type="button" className="btn" onClick={onClose}>
               Cancel
-            </button>
-            <button type="submit" className="btn btn-primary">
-              Save Entry
             </button>
           </div>
         </form>

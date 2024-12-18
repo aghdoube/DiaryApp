@@ -49,6 +49,9 @@ const DiaryProvider = ({ children }) => {
 };
 
 export { DiaryContext, DiaryProvider };
+
+//////////////////////////=>>>>>>Reminder for me<<<<<<<====//////////////////////
+
 //createContext() => is just a global space for sharing data
 //DiaryProvider => is a Component that holds data and functions for other components to use without using props or drilling
 //{Children} => special prop react passes auto
