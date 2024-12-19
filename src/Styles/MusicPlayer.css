@@ -1,5 +1,5 @@
 .music-player {
-  background-color: #deeced;
+  background-color: #0f3245;
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -12,7 +12,7 @@
 .music-player h3 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #2d3748;
+  color: #ecbe80;
   margin-bottom: 5rem;
 }
 
@@ -25,8 +25,8 @@
 }
 
 .controls button {
-  background-color: #bde0fe;
-  color: #0a0a0a;
+  background-color: #ecbe80;
+  color: #0f3245;
   border: none;
   border-radius: 4px;
   width: 55px;
@@ -59,7 +59,7 @@
 
   padding: 0.75rem 1rem;
   border-radius: 12px;
-  background: #a8dadb;
+  background: #0f3245;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s, transform 0.2s;
 }
@@ -85,13 +85,13 @@
 .track-title {
   font-size: 1rem;
   font-weight: 600;
-  color: #2d3748;
+  color: #ecbe80;
   margin: 0;
 }
 
 .track p {
   font-size: 0.9rem;
-  color: #718096;
+  color: #ecbe80;
   margin: 0;
 }
 input[type="range"] {
@@ -101,7 +101,7 @@ input[type="range"] {
   background: #a8dadb;
   border-radius: 5px;
   outline: none;
-  opacity: 0.7;
+  opacity: 0.09;
   transition: opacity 0.2s;
 }
 
@@ -115,7 +115,7 @@ input[type="range"]::-webkit-slider-thumb {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #032e31;
+  background: #ecbe80;
   cursor: pointer;
 }
 
@@ -123,6 +123,6 @@ input[type="range"]::-moz-range-thumb {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #032e31;
+  background: #ecbe80;
   cursor: pointer;
 }

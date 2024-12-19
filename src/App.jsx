@@ -12,7 +12,7 @@ import { CardStylesProvider } from "./Context/CardStyles";
 import { MusicPlayerProvider } from "./Context/MusicPlayerContext";
 import { IziToastProvider } from "./Context/iziToastContext";
 import MusicPlayer from "./Components/MusicPlayer";
-
+import Footer from "./Components/Footer";
 function App() {
   return (
     <IziToastProvider>
@@ -35,6 +35,7 @@ function App() {
           </CardStylesProvider>
         </ButtonProvider>
       </MusicPlayerProvider>
+      <Footer />
     </IziToastProvider>
   );
 }

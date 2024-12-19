@@ -9,8 +9,6 @@ const MainLayout = ({ children }) => {
     <div>
       <NavBar />
       {children}
-
-      <Footer />
     </div>
   );
 };

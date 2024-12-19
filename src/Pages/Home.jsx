@@ -12,6 +12,7 @@ const Home = () => {
     const savedEntries = localStorage.getItem("diaryEntries");
     return savedEntries ? JSON.parse(savedEntries) : [];
   });
+  const [selectedEntryToEdit, setSelectedEntryToEdit] = useState(null);
   const [selectedEntry, setSelectedEntry] = useState(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const { showToast } = useIziToast();
@@ -93,6 +94,28 @@ const Home = () => {
     );
   };
 
+  const handleEditEntry = (entry) => {
+    setSelectedEntryToEdit(entry);
+  };
+
+  const handleSaveEditedEntry = (editedEntry) => {
+    const updatedEntries = entries.map((entry) =>
+      entry.id === editedEntry.id ? editedEntry : entry
+    );
+
+    setEntries(updatedEntries);
+    localStorage.setItem("diaryEntries", JSON.stringify(updatedEntries));
+    setSelectedEntryToEdit(null);
+    showToast("success", "Updated", "The entry has been updated.");
+  };
+
+  const handleDeleteEntry = (entry) => {
+    const updatedEntries = entries.filter((e) => e.id !== entry.id);
+    setEntries(updatedEntries);
+    localStorage.setItem("diaryEntries", JSON.stringify(updatedEntries));
+    showToast("success", "Deleted", "The entry has been deleted.");
+  };
+
   return (
     <MainLayout>
       <Hero onAddEntry={() => setIsAddModalOpen(true)} />
@@ -101,6 +124,8 @@ const Home = () => {
         entries={entries}
         onCardClick={openEntryModal}
         onAddToFavorites={handleAddToFavorites}
+        onEditEntry={handleEditEntry}
+        onDeleteEntry={handleDeleteEntry}
       />
 
       <CreateEntry
@@ -110,7 +135,18 @@ const Home = () => {
       />
 
       {selectedEntry && (
-        <EntryModal entry={selectedEntry} onClose={closeEntryModal} />
+        <EntryModal
+          entry={selectedEntry}
+          onClose={closeEntryModal}
+          onSave={handleSaveEditedEntry}
+        />
+      )}
+      {selectedEntryToEdit && (
+        <EntryModal
+          entry={selectedEntryToEdit}
+          onSave={handleSaveEditedEntry}
+          onClose={() => setSelectedEntryToEdit(null)}
+        />
       )}
     </MainLayout>
   );

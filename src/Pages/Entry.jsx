@@ -53,10 +53,9 @@ const Entry = () => {
 
   return (
     <MainLayout>
-      <div className="entries-container flex flex-col items-center mt-[150px]">
-        <div className="relative w-full max-w-4xl">
-          <img src={Logo3} alt="Logo" className="w-full h-auto" />
-          <h1 className="absolute top-0 left-0 w-full h-full flex items-center justify-center z-10">
+      <div className="  entries-container flex flex-col items-center mt-[150px]">
+        <div className="relative w-full max-w-">
+          <h1 className="entry absolute top-0 left-0 w-full h-full flex items-center justify-center z-10 text-[#ecbe80] ">
             Chronicles
           </h1>
         </div>
@@ -75,7 +74,6 @@ const Entry = () => {
         </div>
       </div>
 
-      {/* Modal for editing entries */}
       {selectedEntryToEdit && (
         <EntryModal
           entry={selectedEntryToEdit}

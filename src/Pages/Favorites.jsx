@@ -3,11 +3,14 @@ import MainLayout from "../Layouts/MainLayout";
 import Cards from "../Components/Cards";
 import Logo3 from "../assets/logo3.jpg";
 import "../Styles/CardStyle.css";
+import EntryModal from "../Components/EntryModal"; // Assume this is the modal component you showed earlier
+
 import { useIziToast } from "../Context/iziToastContext";
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
   const { showToast } = useIziToast();
+  const [selectedEntryToEdit, setSelectedEntryToEdit] = useState(null);
 
   useEffect(() => {
     const savedFavorites = JSON.parse(
@@ -28,17 +31,31 @@ const Favorites = () => {
     );
   };
 
+  const handleEditEntry = (entry) => {
+    setSelectedEntryToEdit(entry);
+  };
+
+  const handleSaveEditedEntry = (editedEntry) => {
+    const updatedFavorites = favorites.map((entry) =>
+      entry.id === editedEntry.id ? editedEntry : entry
+    );
+
+    setFavorites(updatedFavorites);
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+    setSelectedEntryToEdit(null);
+    showToast("success", "Updated", "The entry has been updated.");
+  };
+
   return (
     <MainLayout>
       <div className="favorites-container flex flex-col items-center mt-[150px]">
         <div className="relative w-full max-w-4xl">
-          <img src={Logo3} alt="Logo" className="w-full h-auto" />
           <h1
-            className="absolute top-0 left-0 w-full h-full flex items-center justify-center text-white text-4xl z-10"
+            className="favorite absolute top-0 left-0 w-full h-full flex items-center justify-center text-white text-4xl z-10"
             style={{
               fontSize: "4rem",
               margin: 0,
-              color: "rgb(199, 143, 204)",
+              color: "#ecbe80",
               fontFamily: '"Merriweather", serif',
               fontWeight: 400,
               fontStyle: "italic",
@@ -53,13 +70,20 @@ const Favorites = () => {
               entries={favorites}
               onCardClick={() => {}}
               onDeleteFromFavorites={deleteFromFavorites}
-              isFavoriteList={true}
+              onEditEntry={handleEditEntry}
             />
           ) : (
             <p>No favorite entries found.</p>
           )}
         </div>
       </div>
+      {selectedEntryToEdit && (
+        <EntryModal
+          entry={selectedEntryToEdit}
+          onClose={() => setSelectedEntryToEdit(null)}
+          onSave={handleSaveEditedEntry}
+        />
+      )}
     </MainLayout>
   );
 };

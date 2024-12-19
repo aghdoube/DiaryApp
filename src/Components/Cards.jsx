@@ -38,7 +38,7 @@ const Cards = ({
                     onDeleteFromFavorites(entry);
                   }}
                 >
-                  Delete from Favorites
+                  <i class="fas fa-trash"></i>
                 </Button>
               ) : (
                 <Button
@@ -48,17 +48,25 @@ const Cards = ({
                     onAddToFavorites(entry);
                   }}
                 >
-                  Add to Favorites
+                  <i class="fas fa-heart"></i>
                 </Button>
               )}
               <Button
                 type="read"
                 onClick={(e) => {
-                  e.stopPropagation();
-                  handleReadEntry(entry.id);
+                  e.stopPropagation(); // Prevent event bubbling
+                  onCardClick(entry); // Pass the entry to the modal handler
                 }}
               >
-                {expandedEntryId === entry.id ? "Hide Entry" : "Read Entry"}
+                {expandedEntryId === entry.id ? (
+                  <>
+                    <i className="fas fa-times"></i>{" "}
+                  </>
+                ) : (
+                  <>
+                    <i className="fas fa-glasses"></i>{" "}
+                  </>
+                )}
                 <svg
                   className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
                   aria-hidden="true"
@@ -75,6 +83,7 @@ const Cards = ({
                   />
                 </svg>
               </Button>
+
               <Button
                 type="edit"
                 onClick={(e) => {
@@ -82,17 +91,19 @@ const Cards = ({
                   onEditEntry(entry);
                 }}
               >
-                Edit
+                <i class="fas fa-edit"></i>
               </Button>
-              <Button
-                type="delete"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onDeleteEntry(entry);
-                }}
-              >
-                Delete
-              </Button>
+              {onDeleteEntry && (
+                <Button
+                  type="delete"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onDeleteEntry(entry);
+                  }}
+                >
+                  <i class="fas fa-trash"></i>
+                </Button>
+              )}
             </div>
           </div>
           <div className="card-date">
@@ -110,7 +121,7 @@ Cards.propTypes = {
   onAddToFavorites: PropTypes.func,
   onDeleteFromFavorites: PropTypes.func,
   onEditEntry: PropTypes.func.isRequired,
-  onDeleteEntry: PropTypes.func.isRequired,
+  onDeleteEntry: PropTypes.func,
 };
 
 export default Cards;

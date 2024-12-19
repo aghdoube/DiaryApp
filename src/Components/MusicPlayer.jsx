@@ -16,7 +16,7 @@ const MusicPlayer = () => {
 
   return (
     <div className="music-player">
-      <h3>Music Player</h3>
+      <h3>Enjoy some Music while writing</h3>
       <div className="controls">
         <button onClick={handlePlayPause}>
           {isPlaying ? "Pause" : "Play"}
