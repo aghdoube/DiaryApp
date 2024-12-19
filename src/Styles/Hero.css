@@ -98,3 +98,7 @@
   font-size: 70px;
   color: rgb(199, 143, 204);
 }
+.custom-carousel-item {
+  width: 500px !important;
+  margin: 0 10px;
+}

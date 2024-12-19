@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import MainLayout from "../Layouts/MainLayout";
 import Cards from "../Components/Cards";
-import EntryModal from "../Components/EntryModal"; // Assume this is the modal component you showed earlier
-import Logo3 from "../assets/logo3.jpg";
+import EntryModal from "../Components/EntryModal";
+
 import "../Styles/CardStyle.css";
 import { useIziToast } from "../Context/iziToastContext";
 

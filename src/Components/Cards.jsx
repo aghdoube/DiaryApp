@@ -54,8 +54,8 @@ const Cards = ({
               <Button
                 type="read"
                 onClick={(e) => {
-                  e.stopPropagation(); // Prevent event bubbling
-                  onCardClick(entry); // Pass the entry to the modal handler
+                  e.stopPropagation();
+                  handleReadEntry(entry.id);
                 }}
               >
                 {expandedEntryId === entry.id ? (

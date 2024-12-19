@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 import MainLayout from "../Layouts/MainLayout";
 import Hero from "../Components/Hero";
 import Cards from "../Components/Cards";
@@ -12,10 +14,35 @@ const Home = () => {
     const savedEntries = localStorage.getItem("diaryEntries");
     return savedEntries ? JSON.parse(savedEntries) : [];
   });
+
   const [selectedEntryToEdit, setSelectedEntryToEdit] = useState(null);
   const [selectedEntry, setSelectedEntry] = useState(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const { showToast } = useIziToast();
+  const [modalType, setModalType] = useState(null);
+
+  const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 1536 },
+      items: 3,
+      slidesToSlide: 3,
+    },
+    desktop: {
+      breakpoint: { max: 1536, min: 1024 },
+      items: 2,
+      slidesToSlide: 2,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 640 },
+      items: 2,
+      slidesToSlide: 1,
+    },
+    mobile: {
+      breakpoint: { max: 640, min: 0 },
+      items: 1,
+      slidesToSlide: 1,
+    },
+  };
 
   useEffect(() => {
     try {
@@ -65,15 +92,16 @@ const Home = () => {
 
   const openEntryModal = (entry) => {
     setSelectedEntry(entry);
+    setModalType("read");
   };
 
   const closeEntryModal = () => {
+    setModalType(null);
     setSelectedEntry(null);
   };
 
   const handleAddToFavorites = (entry) => {
     const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-
     const isDuplicate = savedFavorites.some((fav) => fav.id === entry.id);
 
     if (isDuplicate) {
@@ -96,6 +124,7 @@ const Home = () => {
 
   const handleEditEntry = (entry) => {
     setSelectedEntryToEdit(entry);
+    setModalType("edit");
   };
 
   const handleSaveEditedEntry = (editedEntry) => {
@@ -106,6 +135,7 @@ const Home = () => {
     setEntries(updatedEntries);
     localStorage.setItem("diaryEntries", JSON.stringify(updatedEntries));
     setSelectedEntryToEdit(null);
+    setModalType(null);
     showToast("success", "Updated", "The entry has been updated.");
   };
 
@@ -120,13 +150,40 @@ const Home = () => {
     <MainLayout>
       <Hero onAddEntry={() => setIsAddModalOpen(true)} />
 
-      <Cards
-        entries={entries}
-        onCardClick={openEntryModal}
-        onAddToFavorites={handleAddToFavorites}
-        onEditEntry={handleEditEntry}
-        onDeleteEntry={handleDeleteEntry}
-      />
+      <div className="w-full px-4 py-8">
+        {entries.length > 0 ? (
+          <Carousel
+            responsive={responsive}
+            infinite={entries.length > 3}
+            autoPlay={entries.length > 3}
+            autoPlaySpeed={3000}
+            keyBoardControl={true}
+            customTransition="transform 300ms ease-in-out"
+            transitionDuration={300}
+            containerClass="carousel-container"
+            removeArrowOnDeviceType={["tablet", "mobile"]}
+            deviceType="desktop"
+            dotListClass="custom-dot-list-style"
+            itemClass="custom-carousel-item px-2"
+          >
+            {entries.map((entry) => (
+              <div key={entry.id} className="h-full">
+                <Cards
+                  entries={[entry]}
+                  onCardClick={openEntryModal}
+                  onAddToFavorites={handleAddToFavorites}
+                  onEditEntry={handleEditEntry}
+                  onDeleteEntry={handleDeleteEntry}
+                />
+              </div>
+            ))}
+          </Carousel>
+        ) : (
+          <div className="text-center text-gray-500">
+            No entries yet. Add your first diary entry!
+          </div>
+        )}
+      </div>
 
       <CreateEntry
         isOpen={isAddModalOpen}
@@ -134,14 +191,14 @@ const Home = () => {
         onAddEntry={addEntry}
       />
 
-      {selectedEntry && (
+      {selectedEntry && modalType === "read" && (
         <EntryModal
           entry={selectedEntry}
           onClose={closeEntryModal}
           onSave={handleSaveEditedEntry}
         />
       )}
-      {selectedEntryToEdit && (
+      {selectedEntryToEdit && modalType === "edit" && (
         <EntryModal
           entry={selectedEntryToEdit}
           onSave={handleSaveEditedEntry}
