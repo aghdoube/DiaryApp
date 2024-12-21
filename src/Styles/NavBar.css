@@ -17,20 +17,20 @@
 }
 
 .navbar-container {
-  position: relative; /* Container for positioning elements */
+  position: relative; 
 }
 
 .navbar-logo {
   display: flex;
   align-items: center;
   text-decoration: none;
-  position: relative; /* Makes the logo container a reference point for positioning */
+  position: relative; /
 }
 
 .navbar-logo-img {
   height: 100px;
   vertical-align: middle;
-  z-index: 2; /* Keep the image above the text */
+  z-index: 2; 
 }
 
 .navbar-logo-text {
@@ -41,11 +41,11 @@
   font-size: 70px;
   margin-left: 0;
   line-height: 1;
-  position: absolute; /* Positions text behind the image */
+  position: absolute; 
   top: 0;
-  left: 0; /* Adjust these values to position the text */
-  z-index: 1; /* Ensures the text is behind the image */
-  top: 20px; /* Move the text down */
+  left: 0; 
+  z-index: 1; 
+  top: 20px; 
   left: 62px;
 }
 
