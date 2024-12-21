@@ -30,10 +30,6 @@
   object-fit: cover;
 }
 
-.card-content {
-  padding: 1rem;
-}
-
 .card-title {
   margin-bottom: 0.5rem;
   font-size: 1.25rem;
@@ -67,18 +63,17 @@
   border-bottom-left-radius: 0.375rem;
 }
 
-/* New styles for card-actions */
 .card-actions {
   display: flex;
-  justify-content: space-between; /* Distribute buttons evenly */
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
-  gap: 0.5rem; /* Space between buttons */
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   margin-top: 1rem;
 }
 
 .card-actions button {
-  background-color: #ecbe80; /* Button background color */
-  color: #0f3245; /* Text/icon color */
+  background-color: #ecbe80;
+  color: #0f3245;
   border: none;
   border-radius: 0.25rem;
   padding: 0.5rem 1rem;
@@ -86,36 +81,35 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem; /* Space between icon and text */
-  font-size: 0.9rem; /* Font size for button text */
+  gap: 0.5rem;
+  font-size: 0.9rem;
   font-weight: bold;
   transition: background-color 0.3s, transform 0.2s;
 }
 
 .card-actions button i {
-  font-size: 1.1rem; /* Slightly larger icon */
+  font-size: 1.1rem;
 }
 
 .card-actions button:hover {
-  background-color: #deeced; /* Hover background color */
-  transform: scale(1.05); /* Slight hover effect */
+  background-color: #deeced;
+  transform: scale(1.05);
 }
 
 .card-actions button:focus {
-  outline: none; /* Remove focus outline */
+  outline: none;
 }
 
-/* Responsive styles for smaller screens */
 @media (max-width: 768px) {
   .card-container {
     gap: 0.5rem;
   }
 
   .card {
-    max-width: 100%; /* Cards take up full width on smaller screens */
+    max-width: 100%;
   }
 
   .card-actions {
-    justify-content: center; /* Center buttons on small screens */
+    justify-content: center;
   }
 }

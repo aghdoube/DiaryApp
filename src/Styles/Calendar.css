@@ -1,60 +1,52 @@
-/* General Calendar Styles */
 .react-calendar {
-  background-color: #333333; /* Background color of the whole calendar */
-  color: #ecbe80; /* Text color for the calendar */
+  background-color: #333333;
+  color: #ecbe80;
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Change the Background and Text Color for the Day Cells */
 .react-calendar__tile {
-  background-color: #444444; /* Change background color for the day cells */
-  color: #ecbe80; /* Change text color for the day numbers */
+  background-color: #444444;
+  color: #ecbe80;
 }
 
-/* Change the Background Color for the Active Day */
 .react-calendar__tile--active {
-  background-color: #71a3c1; /* Background color when a day is active */
-  color: #ffffff; /* Text color for the active day */
+  background-color: #71a3c1;
+  color: #ffffff;
 }
 
-/* Change the Background Color for Today */
 .react-calendar__tile--now {
-  background-color: #f0f8ff; /* Light background for today */
-  color: #333333; /* Darker text for today */
+  background-color: #f0f8ff;
+  color: #333333;
 }
 
-/* Hover effect for day cells */
 .react-calendar__tile:hover {
-  background-color: #5f5f5f; /* Slightly darker background on hover */
+  background-color: #5f5f5f;
 }
 
-/* Event Styles - Customizing Event Background and Text Color */
 .rbc-event {
-  background-color: #ecbe80; /* Background color of events */
-  color: #333333; /* Text color for event titles */
+  background-color: #ecbe80;
+  color: #333333;
   border-radius: 4px;
 }
 .rbc-event-today {
   background-color: #ecbe80 !important;
 }
 
-/* Change Event Text Color on Hover */
 .rbc-event:hover {
-  background-color: #71a3c1; /* Change background color on hover */
-  color: #ffffff; /* Change text color on hover */
+  background-color: #71a3c1;
+  color: #ffffff;
 }
 
-/* Change the Header and Navigation Controls Color */
 .rbc-header {
-  background-color: #333333; /* Background color for header */
-  color: #ecbe80; /* Text color for the header */
+  background-color: #333333;
+  color: #ecbe80;
 }
 
 .rbc-btn {
-  background-color: #333333; /* Background color for navigation buttons */
-  color: #ecbe80; /* Text color for navigation buttons */
+  background-color: #333333;
+  color: #ecbe80;
   border: none;
 }
 .rbc-agenda-empty {
@@ -76,41 +68,38 @@
   color: #ecbe80;
 }
 .rbc-button-link {
-  color: #ecbe80; /* Text color for navigation buttons */
+  color: #ecbe80;
   border: none;
 }
 .rbc-btn:hover {
-  background-color: #444444; /* Darker background on hover */
-  color: #fff; /* White text on hover */
+  background-color: #444444;
+  color: #fff;
 }
 
 .rbc-toolbar button {
-  color: #ecbe80; /* Text color for toolbar buttons */
-  background-color: transparent; /* Transparent background */
-  border: none; /* Remove any border */
-}
-/* Change the text color of the day numbers in the calendar */
-.rbc-day-bg {
-  color: #ecbe80 !important; /* Day numbers color */
+  color: #ecbe80;
+  background-color: transparent;
+  border: none;
 }
 
-/* Optional: Change the color of the day numbers on hover or selection */
+.rbc-day-bg {
+  color: #ecbe80 !important;
+}
+
 .rbc-day-bg:hover {
-  color: #ecbe80 !important; /* On hover, keep the same color */
-  background-color: #333333; /* Darken background on hover */
+  color: #ecbe80 !important;
+  background-color: #333333;
 }
 
 .rbc-day-bg {
-  color: #ecbe80 !important; /* Change color for all day numbers */
+  color: #ecbe80 !important;
 }
 
-/* Change the color of the day numbers outside the current month */
 .rbc-day-bg.rbc-off-range-bg {
-  color: #0f3245 !important; /* Color for days outside the current month */
+  color: #0f3245 !important;
 }
 
-/* Optional: Change the color of the day numbers when hovered */
-.rbc-day-bg:hover {
+/ .rbc-day-bg:hover {
   background-color: #e6f7ff !important;
   color: #ecbe80 !important;
 }

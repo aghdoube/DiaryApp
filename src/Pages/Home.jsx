@@ -8,6 +8,7 @@ import Cards from "../Components/Cards";
 import CreateEntry from "../Components/CreateEntry";
 import EntryModal from "../Components/EntryModal";
 import { useIziToast } from "../Context/iziToastContext";
+import ReadEntryModal from "../Components/ReadEntryModal";
 
 const Home = () => {
   const [entries, setEntries] = useState(() => {
@@ -150,15 +151,15 @@ const Home = () => {
     <MainLayout>
       <Hero onAddEntry={() => setIsAddModalOpen(true)} />
 
-      <div className="w-full px-4 py-8">
+      <div className="carousel-wrapper w-full px-4 py-8">
         {entries.length > 0 ? (
           <Carousel
             responsive={responsive}
             infinite={entries.length > 3}
             autoPlay={entries.length > 3}
-            autoPlaySpeed={3000}
+            autoPlaySpeed={15000}
             keyBoardControl={true}
-            customTransition="transform 300ms ease-in-out"
+            customTransition="transform 800ms ease-in-out"
             transitionDuration={300}
             containerClass="carousel-container"
             removeArrowOnDeviceType={["tablet", "mobile"]}
@@ -192,11 +193,7 @@ const Home = () => {
       />
 
       {selectedEntry && modalType === "read" && (
-        <EntryModal
-          entry={selectedEntry}
-          onClose={closeEntryModal}
-          onSave={handleSaveEditedEntry}
-        />
+        <ReadEntryModal entry={selectedEntry} onClose={closeEntryModal} />
       )}
       {selectedEntryToEdit && modalType === "edit" && (
         <EntryModal

@@ -13,6 +13,7 @@ import { MusicPlayerProvider } from "./Context/MusicPlayerContext";
 import { IziToastProvider } from "./Context/iziToastContext";
 import MusicPlayer from "./Components/MusicPlayer";
 import Footer from "./Components/Footer";
+
 function App() {
   return (
     <IziToastProvider>
@@ -23,11 +24,12 @@ function App() {
               <div>
                 <Routes>
                   <Route path="/" element={<Home />} />
-                  <Route path="/notfound" element={<NotFound />} />
+
                   <Route path="/createentry" element={<CreateEntry />} />
                   <Route path="/entry" element={<Entry />} />
                   <Route path="/calender" element={<Calender />} />
                   <Route path="/favorites" element={<Favorites />} />
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
                 <MusicPlayer />
               </div>

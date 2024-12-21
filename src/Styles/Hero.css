@@ -21,7 +21,9 @@
 .hero-image {
   width: 100%;
   height: auto;
-  opacity: 0.5;
+  opacity: 0.7;
+
+  border-radius: 10px;
 }
 
 .hero-text {
@@ -44,7 +46,7 @@
 .hero h2 {
   font-size: 2rem;
   margin-top: 1rem;
-  color: #0f3245;
+  color: white;
   font-family: "Merriweather", serif;
   font-weight: 400;
   font-style: italic;

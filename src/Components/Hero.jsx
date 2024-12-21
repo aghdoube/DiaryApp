@@ -1,5 +1,5 @@
 import React from "react";
-import heroImage from "../assets/Hero.jpg";
+import heroImage from "../assets/paper1.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFeatherAlt } from "@fortawesome/free-solid-svg-icons";
 

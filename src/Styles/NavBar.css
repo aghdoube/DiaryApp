@@ -16,15 +16,21 @@
   align-items: center;
 }
 
+.navbar-container {
+  position: relative; /* Container for positioning elements */
+}
+
 .navbar-logo {
   display: flex;
   align-items: center;
   text-decoration: none;
+  position: relative; /* Makes the logo container a reference point for positioning */
 }
 
 .navbar-logo-img {
   height: 100px;
-  margin-right: 10px;
+  vertical-align: middle;
+  z-index: 2; /* Keep the image above the text */
 }
 
 .navbar-logo-text {
@@ -33,6 +39,14 @@
   font-weight: 700;
   font-style: italic;
   font-size: 70px;
+  margin-left: 0;
+  line-height: 1;
+  position: absolute; /* Positions text behind the image */
+  top: 0;
+  left: 0; /* Adjust these values to position the text */
+  z-index: 1; /* Ensures the text is behind the image */
+  top: 20px; /* Move the text down */
+  left: 62px;
 }
 
 .navbar-menu {

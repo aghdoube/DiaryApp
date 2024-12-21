@@ -13,10 +13,6 @@ const Cards = ({
 }) => {
   const [expandedEntryId, setExpandedEntryId] = useState(null);
 
-  const handleReadEntry = (id) => {
-    setExpandedEntryId(expandedEntryId === id ? null : id);
-  };
-
   return (
     <div className="card-container">
       {entries.map((entry) => (
@@ -55,7 +51,7 @@ const Cards = ({
                 type="read"
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleReadEntry(entry.id);
+                  onCardClick(entry);
                 }}
               >
                 {expandedEntryId === entry.id ? (
